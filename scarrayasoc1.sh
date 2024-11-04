@@ -29,11 +29,10 @@ dprint "Has pasado $# argumentos"
 declare -A color_array
 echo
 
-for color in $@; do
-
-	read -p "Introduce un valor hex para $color: " hex_value
-	color_array[$color]=$hex_value
-
+for color in $(cat colors); do
+	colorv=$(cut -d " " -f 1)
+	hex_value=$(cut -d " " -f 2)
+	color_array[$colorv]=$hex_value
 done
 
 # .- Mostrar los colores -.
@@ -66,4 +65,3 @@ done
 
 echo "<html><head><title>BASH</title></head><body><div id=id-1>$(ifconfig)</div></body><style>body{height:100%;background-color:${color_array[$bac_col]};display:flex;justify-content:center;align-items:center;}#id-1{width:fit-content;height:fit-content;background-color:${color_array[$div_col]};color:${color_array[$tex_col]};}</style></html>" > index_dani.html
 dprint "Page created!"
-
